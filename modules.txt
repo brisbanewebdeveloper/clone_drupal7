@@ -10,7 +10,7 @@ node_clone
 token
 globalredirect
 google_analytics
-lightbox2
+lightbox2:7.x-1.x
 addressfield
 draggableviews
 webform

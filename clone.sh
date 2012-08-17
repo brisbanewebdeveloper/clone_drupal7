@@ -7,6 +7,7 @@ then
 fi
 
 
+
 # Core
 if [ ! -d "$1" ]
 then
@@ -32,11 +33,28 @@ for t in "${filecontent[@]}"
 do
     if [ -n "$t" ]
     then
-        if [ -d "$1/sites/all/modules/$t" ]
+
+        # Check if branch is specified
+        if [[ "$t" =~ : ]]
         then
-            echo Module/Theme directory $1 exists
+            arr=$(echo $t | tr ":" "\n")
+            arr=( `echo $arr` ) # Somehow $arr does not get splited properly on my iMac without this
+            module=${arr[0]}
+            branch=${arr[1]}
         else
-            git clone http://git.drupal.org/project/$t.git $1/sites/all/modules/$t
+            module=$t
+        fi
+
+        if [ -d "$1/sites/all/modules/$module" ]
+        then
+            echo Module directory $module exists
+        else
+            if [ -n "$branch" ]
+            then
+                git clone --recursive -b $branch http://git.drupal.org/project/$module.git $1/sites/all/modules/$module
+            else
+                git clone --recursive http://git.drupal.org/project/$module.git $1/sites/all/modules/$module
+            fi
         fi
     fi
 done
@@ -45,6 +63,6 @@ done
 # Theme
 if [ -d "$1/sites/all/themes/omega" ]
 then
-    git clone http://git.drupal.org/project/omega.git $1/sites/all/themes/omega
+    git clone --recursive http://git.drupal.org/project/omega.git $1/sites/all/themes/omega
 fi
 
