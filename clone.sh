@@ -50,6 +50,8 @@ done
 # Theme
 if [ -d "$drupal/sites/all/themes/omega" ]
 then
-    git clone --recursive http://git.drupal.org/project/omega.git $drupal/sites/all/themes/omega
+    echo Theme directory omega exists
+else
+    git clone --recursive -b $branch http://git.drupal.org/project/omega.git $drupal/sites/all/themes/omega
 fi
 
