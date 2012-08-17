@@ -26,7 +26,8 @@ fi
 
 
 # Modules
-filecontent=( `cat "modules.txt"` )
+DIR="$( dirname "${BASH_SOURCE[0]}" )"
+filecontent=( `cat "$DIR/modules.txt"` )
 for t in "${filecontent[@]}"
 do
     if [ -n "$t" ]
