@@ -26,7 +26,7 @@ fi
 
 
 # Modules
-filecontent=( `cat "drupal_modules.txt" `)
+filecontent=( `cat "modules.txt" `)
 for t in "${filecontent[@]}"
 do
     if [ -n "$t" ]
