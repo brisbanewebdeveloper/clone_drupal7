@@ -10,11 +10,12 @@ fi
 
 
 drupal=$1
+branch=7.x-1.x
 
 # Core
 if [ ! -d "$drupal" ]
 then
-    git clone --recursive -b 7.x http://git.drupal.org/project/drupal.git $drupal
+    git clone --recursive -b $branch http://git.drupal.org/project/drupal.git $drupal
     if [ ! -d "$drupal" ]; then
         echo Drupal directory $drupal does not exist
         exit 0
@@ -36,19 +37,6 @@ for module in "${filecontent[@]}"
 do
     if [ -n "$module" ]
     then
-
-        # Check if branch is specified
-        if [[ "$t" =~ : ]]
-        then
-            arr=$(echo $t | tr ":" "\n")
-            arr=( `echo $arr` ) # Somehow $arr does not get splited properly on my iMac without this
-            module=${arr[0]}
-            branch=${arr[1]}
-        else
-            module=$t
-            branch=7.x-1.x
-        fi
-
         if [ -d "$drupal/sites/all/modules/$module" ]
         then
             echo Module directory $module exists
@@ -64,6 +52,6 @@ if [ -d "$drupal/sites/all/themes/omega" ]
 then
     echo Theme directory omega exists
 else
-    git clone --recursive http://git.drupal.org/project/omega.git $drupal/sites/all/themes/omega
+    git clone --recursive -b $branch http://git.drupal.org/project/omega.git $drupal/sites/all/themes/omega
 fi
 
