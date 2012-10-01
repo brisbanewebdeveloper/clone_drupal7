@@ -55,3 +55,26 @@ else
     git clone --recursive -b $branch http://git.drupal.org/project/omega.git $drupal/sites/all/themes/omega
 fi
 
+# Create directory for custom modules
+mkdir $drupal/modules/_custom
+mkdir $drupal/libraries
+
+# Install files for WYSIWYG to use TinyMCE
+unzip ${BASH_SOURCE[0]}/tinymce_3.5.6.zip
+mv ${BASH_SOURCE[0]}/tinymce $drupal/libraries
+
+# unzip ${BASH_SOURCE[0]}/tinymce-plugins-codemagic-307f692.zip
+unzip ${BASH_SOURCE[0]}/codemagic.zip
+mv ${BASH_SOURCE[0]}/codemagic $drupal/libraries/tinymce/jscripts/tiny_mce/plugins
+
+
+# To prevent using newer version of jQuery at Admin pages
+# (Because it does not work on my Chrome)
+unzip ${BASH_SOURCE[0]}/jquery_update_custom.zip
+mv ${BASH_SOURCE[0]}/jquery_update_custom $drupal/modules/all/_custom
+
+
+# Copy javascript file for Views Slideshow
+mkdir $drupal/sites/all/libraries/jquery.cycle
+cp ${BASH_SOURCE[0]}/jquery.cycle.all.js $drupal/sites/all/libraries/jquery.cycle
+

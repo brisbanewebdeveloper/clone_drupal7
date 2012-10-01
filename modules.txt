@@ -13,5 +13,13 @@ google_analytics
 lightbox2
 addressfield
 draggableviews
+views_php
 webform
 xmlsitemap
+wysiwyg
+wysiwyg_codemagic
+taxonomy_menu
+better_exposed_filters
+advanced_help
+views_slideshow
+quicktabs
